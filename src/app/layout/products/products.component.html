@@ -1,0 +1,164 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Forms'" [icon]="'fa-edit'"></app-page-header>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card mb-3">
+                <div class="card-header">Tasks
+                    <button (click)="new()" data-toggle="modal" data-toggle="modal" data-target="#productAddModal" class="btn btn-primary btn-sm pull-right">New</button>
+                </div>
+                <div class="card-body table-responsive">
+                  <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image <i class="fa fa-sort"></i></th>
+                            <th>Name <i class="fa fa-sort"></i></th>
+                            <th>Category</th>
+                           <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of AllProducts">
+                            <td>{{ product.id }}</td>
+                            <td><img src="{{ product.imgpath != 0 ? product.imgpath : defaultImgUrl }}" alt="image" width="60px"></td>
+                            <td>{{ product.name  }}</td>
+                            <td>{{ product.category }}</td> 
+    
+                            <td>
+                                <a href="#" class="text-warning mr-3"  data-toggle="tooltip" data-toggle="modal" (click)="updateModelShow(product)" data-target="#ProductUpModal">Update</a>
+                                <a href="javascript:void(0)" class="text-danger"  data-toggle="tooltip" (click)="delete(product.id)">Delete</a>
+                            </td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">        
+          <!-- Modal -->
+          <div class="modal fade" id="productAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  
+                  <!-- <h5 *ngIf="selectedItem.id" class="modal-title" id="exampleModalLabel">Update</h5> -->
+                  <h5 *ngIf="!selectedItem.id" class="modal-title" id="exampleModalLabel">Create</h5>
+
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <!-- <img *ngIf="selectedItem.id" class="img-thumbnail" id="updateImage" style="width: 100px; height: 100px;" 
+                      src="./assets/images/logo.png" alt=""> -->
+
+                      <img *ngIf="!selectedItem.id" class="img-thumbnail" id="AddEmpImage" style="width: 100px; height: 100px;" 
+                      src="./assets/images/logo.png" alt="">
+                      
+                    </div>
+                    <div class="col-sm-9">
+                      <input id="image" type="file" (change)="onSelect($event)" accept="image/*">
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-6">Name</div>
+                    <div class="col-md-6">Category</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6"><input id="inptName" class="form-control"></div>
+                    <div class="col-md-6"><input id="inptCat" class="form-control"></div>
+          
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <!-- <button *ngIf="selectedItem.id" (click)="update()" type="button" class="btn btn-primary">Update</button> -->
+                  <button *ngIf="!selectedItem.id" (click)="add()" type="button" class="btn btn-primary">Save</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!-- Update Modal -->
+          <div class="modal fade" id="ProductUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  
+                  <h5  class="modal-title" id="exampleModalLabel">Update</h5>
+                  <!-- <h5 *ngIf="!selectedItem.id" class="modal-title" id="exampleModalLabel">Create</h5> -->
+
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <img class="img-thumbnail" id="updateImage" style="width: 100px; height: 100px;" 
+                      [src]="selectedItem['imgpath']" alt="">
+
+                      <!-- <img *ngIf="!selectedItem.id" class="img-thumbnail" id="AddEmpImage" style="width: 100px; height: 100px;" 
+                      src="./assets/images/logo.png" alt=""> -->
+                      
+                    </div>
+                    <div class="col-sm-9">
+                      <input id="image" type="file" (change)="onSelectUpdateImg($event)" accept="image/*">
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-6">Name</div>
+                    <div class="col-md-6">Category</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6"><input id="inptUpName" class="form-control"></div>
+                    <div class="col-md-6"><input id="inptUpCat" class="form-control"></div>
+          
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button (click)="update()" type="button" class="btn btn-primary">Update</button>
+                  <!-- <button *ngIf="!selectedItem.id" (click)="add()" type="button" class="btn btn-primary">Save</button> -->
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>        
+    </div>
+    
+</div>
+
+
+
+

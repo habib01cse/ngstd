@@ -1,0 +1,109 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Forms'" [icon]="'fa-edit'"></app-page-header>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card mb-3">
+                <div class="card-header">Tasks
+                    <button (click)="view()" class="btn btn-primary btn-sm pull-right">View</button> &nbsp;
+                    <button (click)="new()" data-toggle="modal" data-toggle="modal" data-target="#taskModal" class="btn btn-primary btn-sm pull-right">New</button>
+                </div>
+                <div class="card-body table-responsive">
+                  <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name <i class="fa fa-sort"></i></th>
+                            <th>Status</th>
+                           <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let task of AllTasks">
+                            <td>{{ task.id }}</td>
+                            <td>{{ task.name  }}</td>
+                            <td>{{ task.status }}</td> 
+    
+                            <td>
+                                <a href="#" class="text-warning mr-3"  data-toggle="tooltip" data-toggle="modal" (click)="updateModelShow(task)" data-target="#taskModal">Update</a>
+                                <a href="javascript:void(0)" class="text-danger"  data-toggle="tooltip" (click)="delete(task.id)">Delete</a>
+                            </td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">        
+          <!-- Modal -->
+          <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  
+                  <h5 *ngIf="taskObj.id" class="modal-title" id="exampleModalLabel">Update</h5>
+                  <h5  *ngIf="!taskObj.id"class="modal-title" id="exampleModalLabel">Create</h5>
+
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-6">Name</div>
+                    <div class="col-md-6">Status</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6"><input id="addInputName" name="name" [(ngModel)]="taskObj.name" class="form-control"></div>
+                    <div class="col-md-6"><input id="addInputStatus" name="status" [(ngModel)]="taskObj.status" class="form-control"></div>
+          
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button *ngIf="taskObj.id" (click)="update()" type="button" class="btn btn-primary">Update</button>
+                  <button *ngIf="!taskObj.id" (click)="add()" type="button" class="btn btn-primary">Save</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>        
+    </div>
+    
+</div>
+
+
+
+<!-- <div class="modal fade" id="Modal_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">Name</div>
+            <div class="col-md-6">Mobile</div>
+          </div>
+          <div class="row">
+            <div class="col-md-6"><input id="addInputName" class="form-control"></div>
+            <div class="col-md-6"><input id="addInputMobile" class="form-control"></div>
+  
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button (click)="add()" type="button" class="btn btn-primary">Add new user</button>
+        </div>
+
+      </div>
+    </div>
+  </div> -->
