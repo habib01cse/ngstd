@@ -32,8 +32,16 @@
                         </tr>
     
                     </tbody>
-                </table>
+                  </table>
                 </div>
+                <div>totalProduct: {{ totalProduct }}</div>
+                <ngb-pagination 
+                [collectionSize]="totalProduct" 
+                [(page)]="page" 
+                aria-label="Default pagination"
+                (pageChange)="getProductData()"
+                [pageSize]="pageSize"
+                ></ngb-pagination>
             </div>
         </div>
 
@@ -45,7 +53,7 @@
                 <div class="modal-header">
                   
                   <!-- <h5 *ngIf="selectedItem.id" class="modal-title" id="exampleModalLabel">Update</h5> -->
-                  <h5 *ngIf="!selectedItem.id" class="modal-title" id="exampleModalLabel">Create</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Create</h5>
 
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -58,16 +66,29 @@
                       <!-- <img *ngIf="selectedItem.id" class="img-thumbnail" id="updateImage" style="width: 100px; height: 100px;" 
                       src="./assets/images/logo.png" alt=""> -->
 
-                      <img *ngIf="!selectedItem.id" class="img-thumbnail" id="AddEmpImage" style="width: 100px; height: 100px;" 
+                      <img class="img-thumbnail" id="AddEmpImage" style="width: 100px; height: 100px;" 
                       src="./assets/images/logo.png" alt="">
                       
                     </div>
                     <div class="col-sm-9">
+                      <!-- image/*  -->
+                      <!-- CSV/xlsx -->
                       <input id="image" type="file" (change)="onSelect($event)" accept="image/*">
+                      
                     </div>
                   </div>
-
-
+                  <div class="row">
+                    <div class="col-sm-3">
+                      
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="mb-3">
+                        <label for="formFile" class="form-label">Binaty File Upload</label>
+                        <input class="form-control" type="file" id="formFile" (change)="imageUpload($event)">
+                      </div>
+                    </div>
+                  </div>
+                  
                   <div class="row">
                     <div class="col-md-6">Name</div>
                     <div class="col-md-6">Category</div>
@@ -82,7 +103,7 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <!-- <button *ngIf="selectedItem.id" (click)="update()" type="button" class="btn btn-primary">Update</button> -->
-                  <button *ngIf="!selectedItem.id" (click)="add()" type="button" class="btn btn-primary">Save</button>
+                  <button (click)="add()" type="button" class="btn btn-primary">Save</button>
                 </div>
 
               </div>

@@ -27,7 +27,7 @@
                             "node_modules/bootstrap/dist/js/bootstrap.min.js",                            
                             "node_modules/chart.js/dist/Chart.js"
                         ],
-                        "allowedCommonJsDependencies": ["chart.js"]
+                        "allowedCommonJsDependencies": ["chart.js", "jquery"]
                     },
                     "configurations": {
                         "production": {

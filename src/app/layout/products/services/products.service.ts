@@ -39,4 +39,8 @@ export class ProductsService {
     });
   }
 
+  getProdutData(param){
+    return this.http.post(this.baseURL+'products/get-products', param);
+  }
+
 }
